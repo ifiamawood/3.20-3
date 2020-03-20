@@ -6,29 +6,29 @@
 #include<iostream>
 
 using namespace cv;
+using namespace std;
 
 
 int main()
 {
-	cv::Mat a = imread("D:\\coin.png", 0);
-	cv::Mat b;
-	cv::Mat c, d, s, result;
-	int z;
-	cv::threshold(a, b, 0, 255, THRESH_OTSU);
-	for (int i = 1; i < z, i++) {
-		Rect d;
-		d.x = s.at<int>(i, 0);
-		d.y = s.at<int>(i, 1);
-		d.width = s.at<int>(i, 2);
-		d.height = s.at<int>(i, 3);
-		rectangle(result, d, CV_RGB(255, 255, 255), 1, 8, 0);  
+	cv::Mat srcMat = imread("D:\\2.jpg",0);
+	cv::Mat binar;
+	cv::Mat label, stats, centr, open;
+	threshold(srcMat, binar,100, 255,THRESH_BINARY_INV);
+	cv::Mat kernal = getStructuringElement(MORPH_ELLIPSE, Size(9, 9));
+	morphologyEx(binar, open, MORPH_OPEN, kernal);
+	int nComps = connectedComponentsWithStats(open,label, stats, centr,8,CV_32S);
+	for (int i = 0; i <nComps; i++) {
+		Rect b;
+		b.x = stats.at<int>(i, 0);
+		b.y = stats.at<int>(i, 1);
+		b.width = stats.at<int>(i, 2);
+		b.height = stats.at<int>(i, 3);
+		rectangle(open, b, CV_RGB(255, 255, 255), 1, 8, 0);
 	}
-	imshow("binary", );
-	imshow("result", result);
-	imshow("frame", a);
-	moveWindow("frame", 0, 20);
-	moveWindow("binary", a.cols, 20);
-	moveWindow("result", a.cols * 2, 20);
+	cout << "num =" << nComps - 1 << endl;
+	imshow("½á¹û", open);
+	waitKey(0);
     return 0;
 }
 
