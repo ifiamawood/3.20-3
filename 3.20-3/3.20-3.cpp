@@ -15,7 +15,7 @@ int main()
 	cv::Mat binar;
 	cv::Mat label, stats, centr, open;
 	threshold(srcMat, binar,100, 255,THRESH_BINARY_INV);
-	cv::Mat kernal = getStructuringElement(MORPH_ELLIPSE, Size(9, 9));
+	cv::Mat kernal = getStructuringElement(MORPH_ELLIPSE, Size(10, 10));
 	morphologyEx(binar, open, MORPH_OPEN, kernal);
 	int nComps = connectedComponentsWithStats(open,label, stats, centr,8,CV_32S);
 	for (int i = 0; i <nComps; i++) {
