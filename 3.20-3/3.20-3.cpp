@@ -21,7 +21,7 @@ int main()
 		d.y = s.at<int>(i, 1);
 		d.width = s.at<int>(i, 2);
 		d.height = s.at<int>(i, 3);
-		rectangle(result, d, CV_RGB(255, 255, 255), 1, 8, 0);
+		rectangle(result, d, CV_RGB(255, 255, 255), 1, 8, 0);  
 	}
 	imshow("binary", );
 	imshow("result", result);
